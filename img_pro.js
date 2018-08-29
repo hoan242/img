@@ -66,7 +66,15 @@ function HTMLobjectBox(obj_name) {
     'upper_lip': 'upper lip',
     'lower_lip': 'lower lip',
    }
+  var elType_e = {
+    'all': 'all', 
+    'head':'head', 
+    'face': 'face',
+  };
   switch (typeOp) {
+   case 'E':
+      myArray = elType_e;
+      break;
     case 'C':
       myArray = elType_c;
       break;
