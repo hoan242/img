@@ -1,5 +1,17 @@
 var opasity = { 'all':'','person':'','upper body':'','head':'','face':'','right eye':'','right_eye':'','left_eye':'','upper_lip':'','lower_lip':'','left_fist':'','right_fist':'',};
-var typeOp="A";window.location.href.indexOf("TYPE_C")>-1?typeOp="C":window.location.href.indexOf("TYPE_B")>-1&&(typeOp="B");
+var arrType = {
+	'TYPE_A': 'A',
+	'TYPE_B': 'B',
+	'TYPE_C': 'C',
+	'TYPE_D': 'D',
+	'TYPE_E': 'E',
+}
+ for (var key in arrType) {
+    if(window.location.href.indexOf(key)>-1){
+      typeOp = arrType[key]
+    }
+  }
+//var typeOp="A";window.location.href.indexOf("TYPE_C")>-1?typeOp="C":window.location.href.indexOf("TYPE_B")>-1&&(typeOp="B");
 function set_value(t){var a=$(t).val();$("#objEnter").val(a),$("#attributes").focus(),$("#objEnter").focus();for(var o in opasity)o==a&&(opasity[o]="opasity")}
 function set_attr(id){var getVal = $(id).val();$("#attributes").val(getVal);$("#attributes").focus(); }
 function HTMLattributesBox(attList) { return '<textarea name="attributes" id="attributes" type="text" style="height:1em; width: 100%" tabindex="0" title="">'+attList+'</textarea>';};
@@ -54,7 +66,15 @@ function HTMLobjectBox(obj_name) {
     'upper_lip': 'upper lip',
     'lower_lip': 'lower lip',
    }
+  var elType_e = {
+    'all': 'all', 
+    'head':'head', 
+    'face': 'face',
+  };
   switch (typeOp) {
+   case 'E':
+      myArray = elType_e;
+      break;
     case 'C':
       myArray = elType_c;
       break;
