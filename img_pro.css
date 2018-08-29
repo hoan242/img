@@ -1,0 +1,300 @@
+body {
+    margin: 0;
+}
+b {
+    font-size: 4px;
+    font-weight: normal;
+    line-height: 8px;
+}
+#show_all_button,
+#hide_all_button {
+    background: #ef5858;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+#hide_all_button {
+    background: #91bdd6;
+}
+#myPopup {
+	left: 250px !important;
+    top: 200px !important;
+}
+#myPopup br,
+#myPopup b {
+    display: none;
+}
+#label_buttons_navigation,
+#label_buttons_contrast {
+    display: none;
+}
+#button_id {
+    margin-bottom: 10px;
+}
+#button_id {
+    margin-top: 2px;
+}
+#button_id button,
+.attributes button {
+    margin-top: 3px;
+    border: solid 1px #696767;
+    border-radius: 2px;
+    padding: 2px 1px;
+    margin-right: 3px;
+    background: #2897d6;
+    color: white;
+    font-size: 14.5px;
+    min-width: 41px;
+}
+#myPopup span {
+	font-size: 8px;
+    display: block;
+}
+button.attr {
+	background:white;
+}
+button.attr.add {
+    color:#3d6d44;
+}
+button.attr.del {
+	color: black;
+}
+#button_id  button:hover,
+button.attr:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}
+#button_id button.opasity {
+    opacity: 0.5;
+    background: none !important;
+    color: black;
+}
+#button_id button.right_eye, 
+#button_id button.left_eye, 
+#button_id button.eye {
+    background: #292829;
+}
+#button_id button.upper_lip,
+#button_id button.lower_lip {
+    background: #ef5858;
+}
+#button_id button.right_fist ,
+#button_id button.left_fist  {
+    background: #f78d0a;
+}
+#button_id button.lip[value="upper_lip"] {
+/*     margin-left: 34px; */
+}
+#button_id button.lip[value="lower_lip"] {
+    margin-top: 2px;
+/*     margin-left: 60px; */
+}
+.bubble {
+    background-color: #fff;
+    border: 4px solid #f00;
+    font-size: 0;
+}
+.bubble input[type="radio"]{
+	display: none;
+}
+div.attributes {
+    border-top: 1px solid #cacaca;
+    padding: 3px;
+}
+div#header {
+    padding-top: 0px;
+}
+
+.image_canvas {
+    top: 0px !important;
+    max-height: calc(100vh)
+}
+.object_list {
+    padding: 5px 0px 5px 50px;
+    min-width: 160px;
+}
+table tbody tr:nth-child(14),
+table tbody tr:nth-child(5) {
+    /* display: none !important; */
+}
+table tbody tr:nth-child(13) td label,
+table tbody tr:nth-child(11) td label {
+    background: #c781f3;
+}
+table tbody tr:nth-child(13) td label,
+table tbody tr:nth-child(11) td label {
+    min-width: 22px;
+    font-size:8px;
+}
+
+body div form#mainform span {
+	display: none;
+}
+body div form#mainform + div {
+    width: calc(100% - 58px);
+    max-height: calc(100vh);
+}
+body div form#mainform {
+    position: fixed;
+    right: -120px;
+/*     right: 0px; */
+    width: 195px;
+}
+body div form#mainform:hover {
+    position: fixed;
+    right: 0px;
+    width: 195px;
+}
+body div.backstyle form#mainform:hover {
+    position:relative;
+    right: 0px;
+
+}
+body div.backstyle form#mainform {
+    position:relative;
+    right: 0px;
+
+}
+body div form#mainform + div > iframe {
+    border: none !important;
+    width: 100%;
+    max-height: 100vh;
+}
+#main_media {
+    left: 0px;
+    max-width: calc(100%-415px);
+    height: calc(100vh) !important;
+    border: none;
+}
+.image_canvas {
+    left: 0px;
+}
+#caption:parent {
+    display:none;
+}
+body div form#mainform > div {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+body div form#mainform > div > div:last-child span {
+    font-size: 12px;
+}
+body div form#mainform > div > div:last-child select {
+    margin-right: 0px !important;
+}
+#label_buttons_drawing {
+    top: 200px;
+    left: auto;
+    right: 160px !important;
+    z-index: 1;
+}
+.list-button,
+.temp-button,
+.copy-button {
+    padding: 5px;
+    margin: 3px;
+    font-size: 13px;
+    width: auto !important;
+}
+.submit-button {
+    width: 80px;
+    padding: 7px;
+}
+#segmDiv,
+#polygon,
+#bounding_box,
+#caption {
+    display: none;
+}
+polygon[id^="myCanvas_bg_obj"],
+line {
+    opacity: 1;
+    stroke-width: 3.4;
+}
+/* table */
+
+table {
+    font-size: 10px;
+    line-height: 8px;
+}
+table th {
+    font-size: 8px;
+    line-height: 8px;
+}
+table input[type="radio"] {
+    margin: 0px -5px 0px 0px;
+}
+table label {
+    font-size: 9px;
+    line-height: 12px;
+    display: inline-block;
+    padding: 3px 4px 3px;
+    background: #ef5858;
+    border-radius: 2px;
+    color: white;
+    margin-bottom: 5px;
+    cursor: pointer;
+}
+label[for="express0"],
+label[for="happy0"],
+label[for="sad0"],
+label[for="anger0"],
+label[for="suprise0"],
+label[for="celeb0"],
+label[for="beard0"],
+label[for="gender0"] {
+    background: #91bdd6;
+}
+td,
+th {
+    padding: 2px 1px;
+}
+table + div,
+table + div + div {
+    padding: 0 !important;
+}
+table tbody tr:nth-child(16) td {
+    font-size: 12px;
+    line-height: 12px;
+}
+td br {
+    display: none;
+}
+/* Popup*/
+
+#myPopup input[type="button"] {
+    padding: 3px 5px;
+    font-size: 12px;
+    margin: 7px 7px 0px 0px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#myPopup input[value="Done"] {
+	background: #91bdd6;
+	color: white;
+    font-size: 17px;
+}
+ #get_img {
+    position:fixed;
+    left: 0px;
+    top: 0;
+}
+#checkbox {
+    float:left;
+    top: 35px;
+    
+}
+#checkbox input {
+    margin: 55px;
+    
+}
+#dlbtn {
+    background: red;
+    color:#fff;
+    padding: 5px 10px;
+    margin-top:15px;
+    border-radius: 3px;
+}
