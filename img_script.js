@@ -1,9 +1,3 @@
-if(!TOP){
-	const TOP = 0;
-}
-if(!LEFT){
-	const LEFT = 0;
-}
 var opasity = { 'all':'','person':'','upper body':'','head':'','face':'','right eye':'','right_eye':'','left_eye':'','upper_lip':'','lower_lip':'','left_fist':'','right_fist':'',};
 var typeOp="A";window.location.href.indexOf("TYPE_C")>-1?typeOp="C":window.location.href.indexOf("TYPE_B")>-1&&(typeOp="B");
 function set_value(t){var a=$(t).val();$("#objEnter").val(a),$("#attributes").focus(),$("#objEnter").focus();for(var o in opasity)o==a&&(opasity[o]="opasity")}
