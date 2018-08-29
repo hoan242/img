@@ -4,7 +4,7 @@ var arrType = {
 	'TYPE_B': 'B',
 	'TYPE_C': 'C',
 	'TYPE_D': 'D',
-	'TYPE_E': 'E',
+	//'TYPE_E': 'E',
 }
  for (var key in arrType) {
     if(window.location.href.indexOf(key)>-1){
