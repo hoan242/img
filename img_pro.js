@@ -131,9 +131,9 @@ function get_points(){
  
   var arrgs_point = $('#draw_canvas line');
   var dataStream ='{Delay 2}'+ '\r\n'+
-      			'{LMouse down (1114,107)}'+ '\r\n'+
+      			'{LMouse down (1114,707)}'+ '\r\n'+
 			'{Delay 0.01}'+ '\r\n'+
-			'{LMouse up (1114,107)}'+'\r\n';
+			'{LMouse up (1114,707)}'+'\r\n';
       			'{Delay 0.1}' + '\r\n' +
 			'{3 down}'+ '\r\n' +
 			'{Delay 0.1}' + '\r\n' +
