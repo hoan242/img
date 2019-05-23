@@ -149,7 +149,7 @@ function CopyPolygon(type) {
         var draw_y = [];
         var polygon = polygons[i];
         var points = polygon.split(" ");
-        for (var ii = 0; ii < (points.length - 1); ii++) {
+        for (var ii = 0; ii < (points.length); ii++) {
             var point = points[ii];
             var pointxy = point.split(",");
 //            var xs = (LEFT + 1700 - pointxy[0]) * 3.068;
