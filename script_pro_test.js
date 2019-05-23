@@ -134,14 +134,14 @@ function RenderObjectList() {
     $('#anno_list').scrollTop(scrollPos);
 }
 function CopyPolygon(type) {
-   
+
     var polygons = [];
-    if(type == 1){
+    if (type == 1) {
         polygons.push('515.6765106523379,163.24796380090498 519.0775098981901,176.4268358785822 516.5267604638009,191.73133248491706 510.14988687782807,198.95845588235295 501.2222638574661,203.20970493966817 491.0192661199095,204.48507965686275 481.2413932880845,200.23383059954753 474.86451970211164,192.15645739064857 471.0383955505279,178.55246040723983 471.0383955505279,168.34946266968328 474.86451970211164,159.8469645550528 480.816268382353,153.04496606334843 488.04339177978886,150.06909172322776 493.9951404600302,148.79371700603318 499.94688914027154,148.79371700603318 508.02426234917044,153.04496606334843 513.1257612179487,158.1464649321267');
-        
-    }else{
-        
-        polygons.push('421.639313688922,39.42931741887355 430.5427079447967,38.1574039537486 437.53823200298393,39.42931741887355 442.943864229765,43.24505781424841 447.71353972398356,49.60462513987318 449.9393882879522,57.554084296904136 449.9393882879522,62.64173815740395 405.7403953748601,62.64173815740395 405.7403953748601,57.554084296904136 407.64826557254753,50.87653860499813 413.68985453189106,42.927079447967174');
+
+    } else {
+
+        polygons.push('466.4742633345766,35.61357702349869 471.56191719507643,35.295598657217454 478.5574412532637,36.56751212234241 484.28105184632597,40.701230883998505 489.05072734054454,47.06079820962327 491.2765759045132,55.32823573293547 491.2765759045132,60.41588959343528 446.12364789257737,60.41588959343528 446.12364789257737,55.32823573293547 448.0315180902648,48.332711674748225 452.1652368519209,42.927079447967174 458.52480417754566,38.47538232002984');
     }
     for (var i = 0; i < polygons.length; i++) {
 
@@ -149,7 +149,7 @@ function CopyPolygon(type) {
         var draw_y = [];
         var polygon = polygons[i];
         var points = polygon.split(" ");
-        for (var ii = 0; ii < (points.length); ii++) {
+        for (var ii = 0; ii < (points.length - 1); ii++) {
             var point = points[ii];
             var pointxy = point.split(",");
 //            var xs = (LEFT + 1700 - pointxy[0]) * 3.068;
@@ -162,7 +162,7 @@ function CopyPolygon(type) {
         StartPolygon();
         ClosePolygon();
         main_handler.ClonePolygon(draw_x, draw_y, 'wheel', '');
-       
+
     }
 
 
@@ -172,9 +172,24 @@ function GetPoits(test) {
     $('#myCanvas_bg polygon').each(function () {
         polygons.push($(this).attr("points"));
     });
+    var index_x = [];
+    $('#myCanvas_bg image').each(function () {
+        index_x.push($(this).attr("x"));
+    });
+    var index_y = [];
+    $('#myCanvas_bg image').each(function () {
+        index_y.push($(this).attr("y"));
+    });
+
     var namePolygon = [];
     $('#myCanvas_bg title').each(function () {
         namePolygon.push($(this).text());
+
+    });
+
+    var checkPolygon = [];
+    $('#anno_list ol li a').each(function () {
+        checkPolygon.push($(this).text());
 
     });
     var name = $('#anno_list ol li a').map(function () {
@@ -182,38 +197,38 @@ function GetPoits(test) {
 
 
     });
-    var attrs = $('#anno_list ol li').map(function () {
-        var res_final;
-        var res = $(this).text();
-        var n = res.search("_");
-        if (n > 0) {
-
-            var attr_1 = res.split("(");
-            var attr_2 = attr_1[1].split(")");
-            if (attr_2[0].search("01_") > 0) {
-                res_final = attr_2[0].replace('01_', '02_');
-
-            } else if (attr_2[0].search("02_") > 0) {
-                res_final = attr_2[0].replace('02_', '01_');
-            }
-        } else if (res.search("01") > 0) {
-            res_final = '02';
-        } else {
-            res_final = '01';
-        }
-
-        return res_final;
+    var arrts = $('#anno_list ol li').map(function () {
+        return $(this).text();
 
     });
 
-//    console.log(name);
-//    console.log(attrs);
+    var attrsName = [];
+    for (var i = 0; i < arrts.length; i++) {
+        var res;
+        var attr = arrts[i].split("(");
+        var attr_2 = attr[1].split(")");
+        var nameAttr = attr_2[0];
+
+        if (nameAttr.search("01_") >= 0) {
+
+            res = nameAttr.replace('01_', '02_');
+        } else if (nameAttr.search("02_") >= 0) {
+
+            res = nameAttr.replace('02_', '01_');
+        } else if (nameAttr.search("02") == 0) {
+            res = '01';
+        }else {
+            res = '02';
+        }
+
+        attrsName.push(res);
+    }
 
     var arrayAttr = [];
     for (var i = 0; i < name.length; i++) {
 
         if (name[i] !== 'index-center' && name[i] !== 'index-top') {
-            arrayAttr.push(attrs[i]);
+            arrayAttr.push(attrsName[i]);
         }
     }
 
@@ -222,6 +237,7 @@ function GetPoits(test) {
         var draw_x = [];
         var draw_y = [];
         var polygon = polygons[i];
+//            var str = str.toString();
         var points = polygon.split(" ");
         for (var ii = 0; ii < (points.length - 1); ii++) {
             var point = points[ii];
@@ -239,7 +255,30 @@ function GetPoits(test) {
         if (i == test) {
             break;
         }
+//        console.log(polygon);
     }
+
+//    for (var jj = 0; jj < (index_x.length); jj++) {
+//
+//        var draw_x = [];
+//        var draw_y = [];
+//
+//        draw_x.push((1228 - index_x[jj]) * 4.3);
+//        draw_y.push(index_y[jj] * 6.3);
+//
+//        StartPolygon();
+//        ClosePolygon();
+//        main_handler.ClonePolygon(draw_x, draw_y, 'index', '02');
+//
+////        console.log(polygon);
+//    }
+//    console.log(polygons);
+//    console.log(points);
+//    console.log(point);
+//    console.log(draw_x);
+//    console.log(draw_y);
+
+//    return draw_x, draw_y;
 }
 
 function StartPolygon() {
