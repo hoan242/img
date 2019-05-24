@@ -153,8 +153,8 @@ function CopyPolygon(type) {
             var point = points[ii];
             var pointxy = point.split(",");
 //            var xs = (LEFT + 1700 - pointxy[0]) * 3.068;
-            draw_x.push(pointxy[0] * 1.060);
-            draw_y.push(pointxy[1] * 1.060);
+            draw_x.push(pointxy[0] * 2.865);
+            draw_y.push(pointxy[1] * 2.865);
 
         }
 
