@@ -235,7 +235,7 @@ function CopyPolygonSelect() {
 
         StartPolygon();
         ClosePolygon();
-        ClonePolygon(draw_x, draw_y, 'wheel', 'test');
+        ClonePolygon(draw_x, draw_y, 'line', '');
 
     }
 
@@ -266,7 +266,7 @@ function AddWheel() {
 
         StartPolygon();
         ClosePolygon();
-        ClonePolygon(draw_x, draw_y, 'wheel', '');
+        ClonePolygon(draw_x, draw_y, 'line', '');
 
     }
 
