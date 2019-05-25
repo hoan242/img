@@ -41,7 +41,7 @@ function ClonePolygon(draws_x, draws_y, annot, attr) {
 
     CloseQueryPopup();
 
-   
+
     // Update old and new object names for logfile:
     new_name = nn;
     old_name = nn;
@@ -242,7 +242,40 @@ function CopyPolygonSelect() {
 
 
 }
+function AddPolygons() {
 
+    var polygonsArr = $('#polygosValue').val();
+    
+//    if (polygonsArr == null) {
+//        return;
+//    }
+//    return;
+    
+    var polygons = polygonsArr.split("_");
+    console.log( polygons );
+
+    for (var i = 0; i < (polygons.length-1); i++) {
+        var draw_x = [];
+        var draw_y = [];
+        var polygon = polygons[i];
+        var points = polygon.split(" ");
+        for (var ii = 0; ii < (points.length-1); ii++) {
+            var point = points[ii];
+            var pointxy = point.split(",");
+
+            draw_x.push(pointxy[0]);
+            draw_y.push(pointxy[1]);
+
+        }
+
+
+        StartPolygon();
+        ClosePolygon();
+        ClonePolygon(draw_x, draw_y, 'line', '');
+
+    }
+
+}
 function AddWheel() {
 
     var polygons = [];
@@ -1087,9 +1120,11 @@ function RenderObjectList() {
     }
     //html_str += '<b>Polygons in this image ('+ NundeletedPolygons +')</b>';
     //html_str += '<button  onclick="StartPolygon();ClosePolygon(); main_handler.ClonePolygon();" > <span>Clone Polygon</span></button>';
-    html_str += '<button class="polygon test" type="button" onclick="GetPoits(1);" > <span>Clone Test</span></button>';
-    html_str += '<button class="polygon" type="button"  onclick="GetPoits();" > <span>Clone Polygon</span></button>';
-    html_str += '<button  onclick="AddWheel();" >Add Wheel</button>';
+//    html_str += '<button class="polygon test" type="button" onclick="GetPoits(1);" > <span>Clone Test</span></button>';
+//    html_str += '<button class="polygon" type="button"  onclick="GetPoits();" > <span>Clone Polygon</span></button>';
+//    html_str += '<button  onclick="AddWheel();" >Add Wheel</button>';
+    html_str += '<input id="polygosValue" type="text" />';
+    html_str += '<button  onclick="AddPolygons();" >Add Polygons</button>';
     html_str += '<button  onclick="CopyPolygonSelect();" >Copy Select</button>';
     html_str += '<button id="zoomin" class="labelBtnDraw" type="button" title="Zoom In" onclick="javascript:main_media.Zoom(1.15)"><img src="Icons/zoomin.png" width="28" height="38" /></button>';
     html_str += '<button id="zoomout" class="labelBtnDraw" type="button" title="Zoom Out" onclick="javascript:main_media.Zoom(1.0/1.15)"><img src="Icons/zoomout.png" width="28" height="38" /></button>';
