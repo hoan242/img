@@ -251,13 +251,21 @@ function AddPolygons() {
 //    }
 //    return;
     
-    var polygons = polygonsArr.split("_");
-    console.log( polygons );
+    var polygons = polygonsArr.split("#");
+    
+//    console.log( polygons );
 
     for (var i = 0; i < (polygons.length-1); i++) {
         var draw_x = [];
         var draw_y = [];
         var polygon = polygons[i];
+        
+//        var polygonIn = polygon.split(":");
+//        
+//        var annot = polygonIn[0];
+//        var attr = polygonIn[1];
+//        var pointsArr = polygonIn[2];
+        
         var points = polygon.split(" ");
         for (var ii = 0; ii < (points.length-1); ii++) {
             var point = points[ii];
