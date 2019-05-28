@@ -242,45 +242,51 @@ function CopyPolygonSelect() {
 
 
 }
+ function paste() {
+     if(window.clipboardData) {   
+        $('#polygosValue').val(navigator.clipboard.readText());
+     } 
+}
 function AddPolygons() {
+//    paste();
+    if (confirm("Import polygons ?")) {
 
-    var polygonsArr = $('#polygosValue').val();
-    
-//    if (polygonsArr == null) {
-//        return;
-//    }
-//    return;
-    
-    var polygons = polygonsArr.split("#");
-    
+        var polygonsArr = $('#polygosValue').val();
+
+        var polygons = polygonsArr.split("#");
+
 //    console.log( polygons );
 
-    for (var i = 0; i < (polygons.length-1); i++) {
-        var draw_x = [];
-        var draw_y = [];
-        var polygon = polygons[i];
-        
-//        var polygonIn = polygon.split(":");
-//        
-//        var annot = polygonIn[0];
-//        var attr = polygonIn[1];
-//        var pointsArr = polygonIn[2];
-        
-        var points = polygon.split(" ");
-        for (var ii = 0; ii < (points.length-1); ii++) {
-            var point = points[ii];
-            var pointxy = point.split(",");
+        for (var i = 0; i < (polygons.length - 1); i++) {
+            var draw_x = [];
+            var draw_y = [];
+            var polygon = polygons[i];
 
-            draw_x.push(pointxy[0]);
-            draw_y.push(pointxy[1]);
+            var polygonIn = polygon.split(":");
+//        
+            var annot = polygonIn[0].trim();
+            if (annot == '') {
+                annot = 'line';
+            }
+            var attr = polygonIn[1].trim();
+            var pointsArr = polygonIn[2].trim();
+
+            var points = pointsArr.split(" ");
+            for (var ii = 0; ii < (points.length); ii++) {
+                var point = points[ii];
+                var pointxy = point.split(",");
+
+                draw_x.push(pointxy[0]);
+                draw_y.push(pointxy[1]);
+
+            }
+
+
+            StartPolygon();
+            ClosePolygon();
+            ClonePolygon(draw_x, draw_y, annot, attr);
 
         }
-
-
-        StartPolygon();
-        ClosePolygon();
-        ClonePolygon(draw_x, draw_y, 'line', '');
-
     }
 
 }
@@ -1131,7 +1137,7 @@ function RenderObjectList() {
 //    html_str += '<button class="polygon test" type="button" onclick="GetPoits(1);" > <span>Clone Test</span></button>';
 //    html_str += '<button class="polygon" type="button"  onclick="GetPoits();" > <span>Clone Polygon</span></button>';
 //    html_str += '<button  onclick="AddWheel();" >Add Wheel</button>';
-    html_str += '<input id="polygosValue" type="text" />';
+    html_str += '<textarea id="polygosValue" type="text" />';
     html_str += '<button  onclick="AddPolygons();" >Add Polygons</button>';
     html_str += '<button  onclick="CopyPolygonSelect();" >Copy Select</button>';
     html_str += '<button id="zoomin" class="labelBtnDraw" type="button" title="Zoom In" onclick="javascript:main_media.Zoom(1.15)"><img src="Icons/zoomin.png" width="28" height="38" /></button>';
