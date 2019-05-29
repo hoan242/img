@@ -104,6 +104,7 @@ function ClonePolygon(draws_x, draws_y, annot, attr) {
 
     // Write XML to server:
     WriteXML(SubmitXmlUrl, LM_xml, function () {
+        
         return;
     });
 
@@ -258,6 +259,8 @@ function AddPolygons() {
 //    console.log( polygons );
 
         for (var i = 0; i < (polygons.length - 1); i++) {
+            
+              
             var draw_x = [];
             var draw_y = [];
             var polygon = polygons[i];
@@ -281,10 +284,12 @@ function AddPolygons() {
 
             }
 
-
+            
             StartPolygon();
-            ClosePolygon();
+//            ClosePolygon();
             ClonePolygon(draw_x, draw_y, annot, attr);
+//            alert('Process:: '+ (i+1)  + '/' + (polygons.length));
+//            setTimeout(function() {  $('#process').text('Process:: '+ (i+1)  + '/' + (polygons.length-1) );  }, 1000);
 
         }
     }
@@ -412,6 +417,65 @@ function GetPoits(test) {
 function StartPolygon() {
     draw_x = new Array();
     draw_y = new Array();
+
+    // Write message to the console:
+    console.log('LabelMe: Starting draw event...');
+
+    // Set active canvas:
+    active_canvas = DRAW_CANVAS;
+
+    // Get (x,y) mouse click location and button.
+    var x = 100;
+    var y = 100;
+
+
+    // Move draw canvas to front:
+    $('#draw_canvas').css('z-index', '0');
+    $('#draw_canvas_div').css('z-index', '0');
+
+    if (username_flag){
+        alert('step 3.3');
+        submit_username();
+    }
+
+    // Create new annotation structure:
+    var numItems = $(LM_xml).children('annotation').children('object').length;
+    draw_anno = new annotation(numItems);
+
+    // Add first control point:
+    draw_x.push(Math.round(x / main_media.GetImRatio()));
+    draw_y.push(Math.round(y / main_media.GetImRatio()));
+
+    // Draw polyline:
+    draw_anno.SetDivAttach('draw_canvas');
+    draw_anno.DrawPolyLine(draw_x, draw_y);
+
+    // Set mousedown action to handle when user clicks on the drawing canvas:
+    $('#draw_canvas_div').unbind();
+    $('#draw_canvas_div').mousedown({obj: this}, function (e) {
+        return DrawCanvasMouseDown(e.originalEvent);
+    });
+    
+    active_canvas = QUERY_CANVAS;
+    
+    if (draw_anno) {
+//        alert('Step 4');
+        console.log(draw_anno.first_point)
+        draw_anno.DeletePolygon();
+        anno = draw_anno;
+        draw_anno = null;
+    }
+    
+    query_anno = anno;
+    query_anno.SetDivAttach('query_canvas');
+    FillPolygon(query_anno.DrawPolygon(main_media.GetImRatio(), draw_x, draw_y));
+//    WriteLogMsg('*start_polygon');
+
+}
+
+function StartPolygon2() {
+    draw_x = new Array();
+    draw_y = new Array();
     if (!action_CreatePolygon) {
 //        alert('step 1');
         return;
@@ -486,6 +550,7 @@ function StartPolygon() {
     WriteLogMsg('*start_polygon');
 
 }
+
 function ClosePolygon() {
 
     active_canvas = QUERY_CANVAS;
@@ -498,7 +563,7 @@ function ClosePolygon() {
     var anno = null;
 
     if (draw_anno) {
-//        alert('Step 4');
+        alert('Step 4');
         console.log(draw_anno.first_point)
         draw_anno.DeletePolygon();
         anno = draw_anno;
@@ -1138,8 +1203,9 @@ function RenderObjectList() {
 //    html_str += '<button class="polygon" type="button"  onclick="GetPoits();" > <span>Clone Polygon</span></button>';
 //    html_str += '<button  onclick="AddWheel();" >Add Wheel</button>';
     html_str += '<textarea id="polygosValue" type="text" />';
-    html_str += '<button  onclick="AddPolygons();" >Add Polygons</button>';
-    html_str += '<button  onclick="CopyPolygonSelect();" >Copy Select</button>';
+//    html_str += '<p id="process">process!</p>';
+    html_str += '<button  onclick="AddPolygons();" >Add Poly</button>';
+    html_str += '<button  onclick="CopyPolygonSelect();" >Copy</button>';
     html_str += '<button id="zoomin" class="labelBtnDraw" type="button" title="Zoom In" onclick="javascript:main_media.Zoom(1.15)"><img src="Icons/zoomin.png" width="28" height="38" /></button>';
     html_str += '<button id="zoomout" class="labelBtnDraw" type="button" title="Zoom Out" onclick="javascript:main_media.Zoom(1.0/1.15)"><img src="Icons/zoomout.png" width="28" height="38" /></button>';
     html_str += '<button xmlns="http://www.w3.org/1999/xhtml" id="erase" class="labelBtnDraw" type="button" title="Delete last segment" onclick="main_handler.EraseSegment()">';
